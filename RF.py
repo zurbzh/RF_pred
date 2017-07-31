@@ -110,11 +110,13 @@ for i,folder in enumerate(f):
         pred = rf.predict(test_X)
         prob = rf.predict_proba(test_X)
         
-        xx = np.column_stack((test_seqID,prob, pred))
+        to_file = np.column_stack((test_seqID,prob,pred,test_Y))
         
-        with open("output.csv", "wb") as f:
+        file_name = 'rf_predictions/exp_' + str(LO) + '.csv'
+        
+        with open(file_name, "wb") as f:
     		writer = csv.writer(f)
-    		writer.writerows(xx)
+    		writer.writerows(to_file)
         
         
         roc_probas.append(prob)
